@@ -1,21 +1,19 @@
-const express = require('express');
-const { authenticateToken } = require('../middleware/authMiddleware');
-const router = express.Router();
+const express = require('express')
+const { authenticateToken } = require('../middleware/authMiddleware')
+const {
+  followUser,
+  unfollowUser,
+  getUserProfile,
+} = require('../controllers/userController')
+const router = express.Router()
 
-// POST /api/follow/:id
-router.post('/follow/:id', (req, res) => {
-  // Handle follow user logic here
-});
+// POST /api/follow/:id - follow user with the given id
+router.post('/follow/:id', authenticateToken, followUser)
 
-// POST /api/unfollow/:id
-router.post('/unfollow/:id', (req, res) => {
-  // Handle unfollow user logic here
-});
+// POST /api/unfollow/:id - unfollow user with the given id
+router.post('/unfollow/:id', authenticateToken, unfollowUser)
 
 // GET /api/user - gets user profile after authenticating
-router.get('/user', authenticateToken,(req, res) => {
-  // Handle user profile retrieval logic here
-  res.send("Hii")
-});
+router.get('/user', authenticateToken, getUserProfile)
 
-module.exports = router;
+module.exports = router
