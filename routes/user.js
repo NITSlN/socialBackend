@@ -1,4 +1,5 @@
 const express = require('express');
+const { authenticateToken } = require('../middleware/authMiddleware');
 const router = express.Router();
 
 // POST /api/follow/:id
@@ -12,8 +13,9 @@ router.post('/unfollow/:id', (req, res) => {
 });
 
 // GET /api/user - gets user profile after authenticating
-router.get('/user', (req, res) => {
+router.get('/user', authenticateToken,(req, res) => {
   // Handle user profile retrieval logic here
+  res.send("Hii")
 });
 
 module.exports = router;

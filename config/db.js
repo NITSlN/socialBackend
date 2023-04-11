@@ -6,6 +6,7 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
+    console.log("DB Connected");
   } catch (error) {
     const errorMessage = error.toString();
     if (errorMessage.includes("ECONNREFUSED")) {
