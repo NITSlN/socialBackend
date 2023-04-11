@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/UserSchema');
 
 const authenticateToken = async (req, res, next) => {
   const token = req.cookies.access_token;
@@ -9,7 +10,7 @@ const authenticateToken = async (req, res, next) => {
   try {
       // Get user from the token
       const user = await User.findOne({email}).select('-password')
-
+      if(!user)  throw new Error("User not present!");
       req.user = user
       next()
     } catch (error) {
