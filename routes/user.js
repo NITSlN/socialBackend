@@ -1,10 +1,10 @@
 const express = require('express')
-const { authenticateToken } = require('../middleware/authMiddleware')
 const {
   followUser,
   unfollowUser,
   getUserProfile,
 } = require('../controllers/userController')
+const {authenticateToken} = require('../middlewares/authMiddleware')
 const router = express.Router()
 
 // POST /api/follow/:id - follow user with the given id
