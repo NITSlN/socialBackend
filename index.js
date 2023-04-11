@@ -8,10 +8,10 @@ const postRoutes = require('./routes/post');
 
 require('dotenv').config();
 // Middleware to parse JSON request bodies
+connectDB()
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
-connectDB()
 
 // Use routes
 app.use('/api', authRoutes);
