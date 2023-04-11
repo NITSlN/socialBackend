@@ -1,5 +1,6 @@
 const Comment = require('../models/CommentSchema')
 const Post = require('../models/PostSchema')
+const User = require('../models/UserSchema')
 
 const createPost = async (req, res) => {
   const { title, description } = req.body
@@ -32,8 +33,7 @@ const deletePost = async (req, res) => {
 
     // Delete the post from the Posts collection
     const post = await Post.findOneAndDelete({
-      _id: postId,
-      user_id: userId,
+      _id: postId
     })
 
     if (!post) {

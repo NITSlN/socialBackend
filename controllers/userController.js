@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const User = require('../models/UserSchema')
 
 // POST /api/follow/:id - follow a user
 const followUser = async (req, res) => {
