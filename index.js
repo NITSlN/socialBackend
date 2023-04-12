@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
+const PORT = process.env.PORT || 3001;
 
 require('dotenv').config();
 // Middleware to parse JSON request bodies
