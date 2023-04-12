@@ -3,7 +3,9 @@ const User = require('../models/UserSchema');
 
 const authenticateToken = async (req, res, next) => {
   const token = req.cookies.access_token;
-  if (!token) throw new Error("You are not authenticated!");
+  if (!token){
+    res.status(401).json({message:"You are not authenticated!"})
+  }
 
   // Dummy email for demonstration purposes
   const {email} = jwt.verify(token, process.env.JWT_SECRET)

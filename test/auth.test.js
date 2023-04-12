@@ -2,15 +2,27 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../index');
 const expect = chai.expect;
+const User = require('../models/UserSchema')
 
 chai.use(chaiHttp);
 
 describe('User authentication', () => {
+  let user
+  beforeEach(async function() {
+    this.timeout(5000)
+    user = new User({
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      password: 'password123',
+    })
+    await user.save()
+  })
+
+  afterEach(async () => {
+    await User.findOneAndDelete({ email: user.email })
+  })
+
   it('should authenticate user and set cookie with access token', (done) => {
-    const user = {
-      email: 'testuser@example.com',
-      password: 'testpassword',
-    };
     chai.request(app)
       .post('/api/authenticate')
       .send(user)
@@ -32,3 +44,4 @@ describe('User authentication', () => {
       });
   }).timeout(5000);
 });
+
