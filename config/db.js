@@ -6,17 +6,9 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
-    console.log("DB Connected");
+    console.log('Database connected');
   } catch (error) {
-    const errorMessage = error.toString();
-    if (errorMessage.includes("ECONNREFUSED")) {
-      console.log("Connection to MongoDB failed");
-      console.log("Unstable Network Connection");
-      console.log("nvalid Connection String");
-      console.log("MongoDB Server may not be running");
-    } else {
-      console.error("Error while connecting to mongo database", error);
-    }
+    console.error("Error while connecting to mongo database", error);
     process.exit(1);
   }
 };
