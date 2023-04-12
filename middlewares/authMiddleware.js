@@ -10,13 +10,15 @@ const authenticateToken = async (req, res, next) => {
   try {
       // Get user from the token
       const user = await User.findOne({email}).select('-password')
-      if(!user)  throw new Error("User not present!");
+      if(!user){
+        res.status(404).json({message:'User not found'})
+      }
       req.user = user
       next()
     } catch (error) {
-      console.log(error)
-      res.status(401)
-      throw new Error('Not authorized')
+      console.log("balle")
+      res.status(404)
+      throw new Error('User not found')
     }
 };
 

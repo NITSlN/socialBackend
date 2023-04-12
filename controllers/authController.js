@@ -11,7 +11,7 @@ const loginUser = async (req, res) => {
         email,password,name
       })
     }
-    token = generateToken(email)// using dummy id as 1
+    token = generateToken(email)
     res
       .cookie('access_token', token, {
         expires: new Date(Date.now() + 25892000000),
@@ -22,7 +22,8 @@ const loginUser = async (req, res) => {
         token 
       })
   } catch (e) {
-    console.log(e)
+    console.error(e);
+    res.status(400).json({ message: 'Email and Password is required' });
   }
 }
 

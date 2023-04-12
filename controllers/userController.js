@@ -25,7 +25,7 @@ const followUser = async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: `You have followed ${followUser.username}` })
+      .json({ message: `You have followed ${followUser.name}` })
   } catch (err) {
     console.error(err)
     return res.status(500).json({ message: 'Internal server error' })
@@ -61,7 +61,7 @@ const unfollowUser = async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: `You have unfollowed ${unfollowUser.username}` })
+      .json({ message: `You have unfollowed ${unfollowUser.name}` })
   } catch (err) {
     console.error(err)
     return res.status(500).json({ message: 'Internal server error' })
@@ -81,7 +81,7 @@ const getUserProfile = async (req, res) => {
     return res
       .status(200)
       .json({
-        userName: user.name,
+        name: user.name,
         followers: user.followers.length,
         following: user.following.length,
       })
