@@ -5,5 +5,4 @@ const { loginUser, createUser } = require('../controllers/authController');
 // POST /api/authenticate
 // API endpoints for user authentication
 router.post('/authenticate', loginUser);
-router.post('/newUser',createUser)
 module.exports = router;
