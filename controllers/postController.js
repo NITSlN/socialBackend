@@ -141,7 +141,7 @@ const addComment = async (req, res) => {
     post.comments.push(comment)
     await post.save()
 
-    return res.status(200).json({ message: 'Comment added successfully' })
+    return res.status(200).json({ commentId:comment._id })
   } catch (err) {
     console.error(err)
     return res.status(500).json({ message: 'Internal server error' })
