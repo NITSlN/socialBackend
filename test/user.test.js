@@ -14,35 +14,32 @@ describe('User functionality', function () {
   let user1,user2;
   this.timeout(5000)
   
-  before(function (done) {
-    this.timeout(10000); // set timeout to 10 seconds
-    // log in user and get access token
-    user1 = {
+  before(async function () {
+    // create user1 and user2
+    this.timeout(10000)
+    user1 = await User.create({
+      name: 'testuser1',
       email: 'testuser1@example.com',
       password: 'testpassword1',
-    }
-    user2 = {
+    })
+    user2 = await User.create({
+      name: 'testuser2',
       email: 'testuser2@example.com',
       password: 'testpassword2',
-    }
-    chai
+    })
+    // log in user1 and get access token
+    const res = await chai
       .request(app)
       .post('/api/authenticate')
-      .send(user1)
-      .end((err, res) => {
-        accessToken = res.body.token
-        done()
+      .send({
+        email: user1.email,
+        password: user1.password,
       })
-    chai
-      .request(app)
-      .post('/api/authenticate')
-      .send(user2)
-      .end((err, res) => {
-        done()
-      })
+    accessToken = res.body.token
   })
+
   
-  afterEach(async () => {
+  after(async () => {
     await User.findOneAndDelete({ email: user1.email })
     await User.findOneAndDelete({ email: user2.email })
   })
@@ -101,7 +98,7 @@ describe('User functionality', function () {
           expect(res).to.have.status(200)
           expect(res.body).to.have.property(
             'message',
-            'You have unfollowed nitishgoku01',
+            'You have unfollowed '+user2.name,
           )
           done()
         })
@@ -144,7 +141,7 @@ describe('User functionality', function () {
         .set('Cookie', `access_token=${accessToken}`)
         .end((err, res) => {
           expect(res).to.have.status(200)
-          expect(res.body).to.have.property('name', 'testuser')
+          expect(res.body).to.have.property('name', user1.name)
           done()
         })
     }).timeout(5000)

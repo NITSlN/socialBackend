@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 describe('User authentication', () => {
   let user
-  beforeEach(async function() {
+  before(async function() {
     this.timeout(5000)
     user = new User({
       name: 'John Doe',
@@ -18,7 +18,7 @@ describe('User authentication', () => {
     await user.save()
   })
 
-  afterEach(async () => {
+  after(async () => {
     await User.findOneAndDelete({ email: user.email })
   })
 
