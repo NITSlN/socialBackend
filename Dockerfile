@@ -18,6 +18,6 @@ ENV MONGO_URI=mongodb+srv://nitish:nitish123@socialtestcluster.9bataei.mongodb.n
 ENV JWT_SECRET=Nitish123
 # Expose the port on which the app will run
 EXPOSE 3001
-
 # Start the app
-CMD [ "npm", "start" ]
+CMD ["sh", "-c", "npm test"]
+

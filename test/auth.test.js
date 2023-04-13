@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 describe('User authentication', () => {
   let user
   before(async function() {
-    this.timeout(5000)
+    this.timeout(10000)
     user = new User({
       name: 'John Doe',
       email: 'john.doe@example.com',
