@@ -19,5 +19,5 @@ ENV JWT_SECRET=Nitish123
 # Expose the port on which the app will run
 EXPOSE 3001
 # Start the app
-CMD ["sh", "-c", "npm test"]
+CMD ["npm","test"]
 
