@@ -169,10 +169,7 @@ const getAllPosts = async (req, res) => {
   try {
     const userId = req.user.id
 
-    const posts = await Post.find({ user_id: userId })
-      .populate('comments.user_id', '-password')
-      .sort({ created_at: 'desc' })
-      .exec()
+    const posts = await Post.find({ userId })
 
     const formattedPosts = posts.map((post) => ({
       id: post._id,
